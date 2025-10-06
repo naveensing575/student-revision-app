@@ -122,11 +122,11 @@ export default function ChatPage() {
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-                <MessageCircle className="h-8 w-8" aria-hidden="true" />
+              <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">
+                <MessageCircle className="h-8 w-8 text-primary" aria-hidden="true" />
                 AI Study Chat
               </h1>
-              <p className="text-white/80 mt-2">
+              <p className="text-muted-foreground mt-2">
                 Ask questions about your study materials
               </p>
             </div>
@@ -177,7 +177,7 @@ export default function ChatPage() {
                 {messages.length === 0 ? (
                   <div className="flex flex-col items-center justify-center h-full text-center">
                     <MessageCircle className="h-16 w-16 text-muted-foreground mb-4" aria-hidden="true" />
-                    <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">
                       Start a conversation
                     </h3>
                     <p className="text-sm text-muted-foreground max-w-sm">

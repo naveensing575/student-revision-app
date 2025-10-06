@@ -51,11 +51,11 @@ export default function DashboardPage() {
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-              <BarChart3 className="h-8 w-8 text-blue-600" aria-hidden="true" />
+            <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">
+              <BarChart3 className="h-8 w-8 text-primary" aria-hidden="true" />
               Progress Dashboard
             </h1>
-            <p className="text-gray-600 mt-2">
+            <p className="text-muted-foreground mt-2">
               Track your learning progress and quiz performance
             </p>
           </div>
@@ -70,9 +70,9 @@ export default function DashboardPage() {
         {stats.totalAttempts === 0 ? (
           <Card>
             <CardContent className="py-12 text-center">
-              <BarChart3 className="h-16 w-16 text-gray-300 mx-auto mb-4" aria-hidden="true" />
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">No quiz data yet</h3>
-              <p className="text-gray-500 mb-6">
+              <BarChart3 className="h-16 w-16 text-muted-foreground mx-auto mb-4" aria-hidden="true" />
+              <h3 className="text-xl font-semibold text-foreground mb-2">No quiz data yet</h3>
+              <p className="text-muted-foreground mb-6">
                 Start taking quizzes to see your progress here!
               </p>
               <Link href="/">
@@ -88,7 +88,7 @@ export default function DashboardPage() {
                 <CardHeader className="pb-3">
                   <CardDescription>Total Attempts</CardDescription>
                   <CardTitle className="text-3xl flex items-center gap-2">
-                    <Target className="h-6 w-6 text-blue-600" aria-hidden="true" />
+                    <Target className="h-6 w-6 text-primary" aria-hidden="true" />
                     {stats.totalAttempts}
                   </CardTitle>
                 </CardHeader>
@@ -98,7 +98,7 @@ export default function DashboardPage() {
                 <CardHeader className="pb-3">
                   <CardDescription>Average Score</CardDescription>
                   <CardTitle className="text-3xl flex items-center gap-2">
-                    <Award className="h-6 w-6 text-green-600" aria-hidden="true" />
+                    <Award className="h-6 w-6 text-green-500" aria-hidden="true" />
                     {stats.averageScore}%
                   </CardTitle>
                 </CardHeader>
@@ -108,7 +108,7 @@ export default function DashboardPage() {
                 <CardHeader className="pb-3">
                   <CardDescription>Total Correct</CardDescription>
                   <CardTitle className="text-3xl flex items-center gap-2">
-                    <TrendingUp className="h-6 w-6 text-purple-600" aria-hidden="true" />
+                    <TrendingUp className="h-6 w-6 text-primary" aria-hidden="true" />
                     {stats.totalCorrect}/{stats.totalQuestions}
                   </CardTitle>
                 </CardHeader>
@@ -163,14 +163,14 @@ export default function DashboardPage() {
                   {attempts.map((attempt) => (
                     <div
                       key={attempt.id}
-                      className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border bg-gray-50 hover:bg-gray-100 transition-colors"
+                      className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border border-border bg-card/50 hover:bg-card transition-colors"
                     >
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <p className="font-medium text-gray-900 truncate">{attempt.pdfName}</p>
+                          <p className="font-medium text-foreground truncate">{attempt.pdfName}</p>
                           <Badge variant="outline">{attempt.quizType}</Badge>
                         </div>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-muted-foreground">
                           {attempt.correctAnswers} / {attempt.totalQuestions} correct
                           {' • '}
                           <span className="hidden sm:inline">{formatDate(attempt.timestamp)}</span>
@@ -184,10 +184,10 @@ export default function DashboardPage() {
                         <div
                           className={`text-xl sm:text-2xl font-bold w-12 sm:w-16 text-right flex-shrink-0 ${
                             attempt.score >= 80
-                              ? 'text-green-600'
+                              ? 'text-green-500'
                               : attempt.score >= 60
-                              ? 'text-yellow-600'
-                              : 'text-red-600'
+                              ? 'text-yellow-500'
+                              : 'text-red-500'
                           }`}
                         >
                           {attempt.score}%

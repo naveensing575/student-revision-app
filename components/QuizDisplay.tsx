@@ -105,10 +105,10 @@ export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: Quiz
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="text-center py-6">
-            <div className="text-6xl font-bold text-blue-600 mb-2">
+            <div className="text-6xl font-bold text-primary mb-2">
               {percentage}%
             </div>
-            <p className="text-lg text-gray-700">
+            <p className="text-lg text-foreground">
               {score} out of {quiz.length} correct
             </p>
           </div>
@@ -125,34 +125,34 @@ export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: Quiz
                 <div
                   key={index}
                   className={`p-4 rounded-lg border-2 ${
-                    isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'
+                    isCorrect ? 'border-green-500/50 bg-green-500/10' : 'border-red-500/50 bg-red-500/10'
                   }`}
                 >
                   <div className="flex items-start gap-3 mb-2">
                     {isCorrect ? (
-                      <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                      <CheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" aria-hidden="true" />
                     ) : (
-                      <XCircle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                      <XCircle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" aria-hidden="true" />
                     )}
                     <div className="flex-1">
-                      <p className="font-medium text-gray-900 mb-1">
+                      <p className="font-medium text-foreground mb-1">
                         Question {index + 1}: {q.question}
                       </p>
                       {quizType === 'MCQ' && (
                         <>
-                          <p className="text-sm text-gray-600">
-                            Your answer: <span className="font-medium">{userAnswers[index] || 'Not answered'}</span>
+                          <p className="text-sm text-muted-foreground">
+                            Your answer: <span className="font-medium text-foreground">{userAnswers[index] || 'Not answered'}</span>
                           </p>
                           {!isCorrect && (
-                            <p className="text-sm text-gray-600">
-                              Correct answer: <span className="font-medium text-green-700">{q.correctAnswer}</span>
+                            <p className="text-sm text-muted-foreground">
+                              Correct answer: <span className="font-medium text-green-500">{q.correctAnswer}</span>
                             </p>
                           )}
                         </>
                       )}
-                      <div className="mt-2 p-3 bg-white rounded border">
-                        <p className="text-sm font-semibold text-gray-700 mb-1">Explanation:</p>
-                        <p className="text-sm text-gray-600">{q.explanation}</p>
+                      <div className="mt-2 p-3 bg-card rounded border border-border">
+                        <p className="text-sm font-semibold text-foreground mb-1">Explanation:</p>
+                        <p className="text-sm text-muted-foreground">{q.explanation}</p>
                       </div>
                     </div>
                   </div>
@@ -192,7 +192,7 @@ export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: Quiz
             {currentQuestion.options.map((option, idx) => (
               <div
                 key={idx}
-                className="flex items-center space-x-3 rounded-lg border p-4 hover:bg-gray-50 transition-colors"
+                className="flex items-center space-x-3 rounded-lg border border-border p-4 hover:bg-primary/5 transition-colors"
               >
                 <RadioGroupItem
                   value={option}
@@ -201,7 +201,7 @@ export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: Quiz
                 />
                 <Label
                   htmlFor={`option-${idx}`}
-                  className="flex-1 cursor-pointer text-base"
+                  className="flex-1 cursor-pointer text-base text-foreground"
                 >
                   {option}
                 </Label>
@@ -218,7 +218,7 @@ export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: Quiz
               value={userAnswers[currentQuestionIndex]}
               onChange={(e) => handleAnswerChange(e.target.value)}
               disabled={submitted[currentQuestionIndex]}
-              className="w-full min-h-[150px] p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full min-h-[150px] p-4 border border-border bg-background text-foreground rounded-lg focus:ring-2 focus:ring-primary focus:border-primary disabled:bg-muted disabled:cursor-not-allowed"
               placeholder={quizType === 'SAQ' ? 'Write a brief 2-3 sentence answer...' : 'Write a detailed paragraph answer...'}
               aria-label="Answer input"
             />
@@ -226,13 +226,13 @@ export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: Quiz
         )}
 
         {submitted[currentQuestionIndex] && (
-          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg" role="region" aria-label="Answer explanation">
-            <p className="text-sm font-semibold text-blue-900 mb-2">
+          <div className="p-4 bg-primary/10 border border-primary/30 rounded-lg" role="region" aria-label="Answer explanation">
+            <p className="text-sm font-semibold text-foreground mb-2">
               {quizType === 'MCQ' ? 'Correct Answer:' : 'Model Answer:'}
             </p>
-            <p className="text-sm text-blue-800 mb-3">{currentQuestion.correctAnswer}</p>
-            <p className="text-sm font-semibold text-blue-900 mb-1">Explanation:</p>
-            <p className="text-sm text-blue-800">{currentQuestion.explanation}</p>
+            <p className="text-sm text-foreground mb-3">{currentQuestion.correctAnswer}</p>
+            <p className="text-sm font-semibold text-foreground mb-1">Explanation:</p>
+            <p className="text-sm text-muted-foreground">{currentQuestion.explanation}</p>
           </div>
         )}
 
