@@ -141,7 +141,7 @@ export default function DashboardPage() {
             {/* Recent Attempts */}
             <Card>
               <CardHeader>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
                     <CardTitle>Quiz History</CardTitle>
                     <CardDescription>Your recent quiz attempts</CardDescription>
@@ -151,6 +151,7 @@ export default function DashboardPage() {
                     size="sm"
                     onClick={handleClearAll}
                     aria-label="Clear all quiz history"
+                    className="w-full sm:w-auto"
                   >
                     <Trash2 className="mr-2 h-4 w-4" aria-hidden="true" />
                     Clear All
@@ -162,25 +163,26 @@ export default function DashboardPage() {
                   {attempts.map((attempt) => (
                     <div
                       key={attempt.id}
-                      className="flex items-center justify-between p-4 rounded-lg border bg-gray-50 hover:bg-gray-100 transition-colors"
+                      className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-lg border bg-gray-50 hover:bg-gray-100 transition-colors"
                     >
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <p className="font-medium text-gray-900">{attempt.pdfName}</p>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                          <p className="font-medium text-gray-900 truncate">{attempt.pdfName}</p>
                           <Badge variant="outline">{attempt.quizType}</Badge>
                         </div>
                         <p className="text-sm text-gray-600">
                           {attempt.correctAnswers} / {attempt.totalQuestions} correct
                           {' • '}
-                          {formatDate(attempt.timestamp)}
+                          <span className="hidden sm:inline">{formatDate(attempt.timestamp)}</span>
+                          <span className="sm:hidden">{new Date(attempt.timestamp).toLocaleDateString()}</span>
                         </p>
                       </div>
-                      <div className="flex items-center gap-4">
-                        <div className="w-32">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        <div className="flex-1 sm:flex-initial sm:w-32">
                           <Progress value={attempt.score} className="h-2" aria-label={`Score: ${attempt.score}%`} />
                         </div>
                         <div
-                          className={`text-2xl font-bold w-16 text-right ${
+                          className={`text-xl sm:text-2xl font-bold w-12 sm:w-16 text-right flex-shrink-0 ${
                             attempt.score >= 80
                               ? 'text-green-600'
                               : attempt.score >= 60
