@@ -56,16 +56,11 @@ IMPORTANT: Return ONLY the JSON array, no additional text.`
     const response = result.response
     let text = response.text()
 
-    console.log('Raw AI response:', text)
-
-    // Clean up the response - remove markdown code blocks if present
     text = text.replace(/```json\s*/g, '').replace(/```\s*/g, '')
 
-    // Try to find JSON array
     let jsonMatch = text.match(/\[\s*\{[\s\S]*\}\s*\]/)
 
     if (!jsonMatch) {
-      // Fallback: try to find just the array brackets
       const startIndex = text.indexOf('[')
       const endIndex = text.lastIndexOf(']')
 
@@ -78,12 +73,9 @@ IMPORTANT: Return ONLY the JSON array, no additional text.`
 
     let jsonString = jsonMatch[0]
 
-    // Clean up common JSON issues
     jsonString = jsonString
-      .replace(/,\s*}/g, '}')  // Remove trailing commas
-      .replace(/,\s*]/g, ']')  // Remove trailing commas in arrays
-
-    console.log('Extracted JSON:', jsonString)
+      .replace(/,\s*}/g, '}')
+      .replace(/,\s*]/g, ']')
 
     const quiz = JSON.parse(jsonString)
 
@@ -93,8 +85,6 @@ IMPORTANT: Return ONLY the JSON array, no additional text.`
 
     return quiz
   } catch (error: any) {
-    console.error('Error generating quiz:', error)
-    console.error('Error details:', error.message)
     throw new Error(`Failed to generate quiz: ${error.message}`)
   }
 }

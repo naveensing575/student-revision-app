@@ -41,7 +41,6 @@ ${message}`
 
     return NextResponse.json({ message: text })
   } catch (error: any) {
-    console.error('Chat error:', error)
     return NextResponse.json(
       { error: error.message || 'Failed to generate response' },
       { status: 500 }

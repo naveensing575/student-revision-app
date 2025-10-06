@@ -33,7 +33,6 @@ export default function HomePage() {
   const handlePDFSelect = (file: File) => {
     setSelectedPDF(file)
     setGeneratedQuiz(null)
-    console.log('PDF selected:', file.name)
   }
 
   const handleQuizGenerated = (quiz: Question[], type: 'MCQ' | 'SAQ' | 'LAQ') => {

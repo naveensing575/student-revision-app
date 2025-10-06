@@ -16,7 +16,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ quiz })
   } catch (error: any) {
-    console.error('Quiz generation error:', error)
     return NextResponse.json(
       { error: error.message || 'Failed to generate quiz' },
       { status: 500 }
