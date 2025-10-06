@@ -50,27 +50,27 @@ export default function PDFViewer({ file }: PDFViewerProps) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-gray-100 rounded-lg overflow-hidden border border-gray-300">
+    <div className="flex flex-col h-full bg-card/50 rounded-lg overflow-hidden border border-border">
       {/* Controls */}
-      <div className="bg-white border-b border-gray-300 px-4 py-3 flex items-center justify-between">
+      <div className="bg-card border-b border-border px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button
             onClick={goToPrevPage}
             disabled={pageNumber <= 1}
-            className="p-2 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-2 rounded hover:bg-primary/10 disabled:opacity-50 disabled:cursor-not-allowed text-foreground"
             title="Previous page"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
 
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-sm font-medium text-foreground">
             Page {pageNumber} of {numPages}
           </span>
 
           <button
             onClick={goToNextPage}
             disabled={pageNumber >= numPages}
-            className="p-2 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-2 rounded hover:bg-primary/10 disabled:opacity-50 disabled:cursor-not-allowed text-foreground"
             title="Next page"
           >
             <ChevronRight className="h-5 w-5" />
@@ -81,20 +81,20 @@ export default function PDFViewer({ file }: PDFViewerProps) {
           <button
             onClick={zoomOut}
             disabled={scale <= 0.6}
-            className="p-2 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-2 rounded hover:bg-primary/10 disabled:opacity-50 disabled:cursor-not-allowed text-foreground"
             title="Zoom out"
           >
             <ZoomOut className="h-5 w-5" />
           </button>
 
-          <span className="text-sm font-medium text-gray-700 w-16 text-center">
+          <span className="text-sm font-medium text-foreground w-16 text-center">
             {Math.round(scale * 100)}%
           </span>
 
           <button
             onClick={zoomIn}
             disabled={scale >= 2.0}
-            className="p-2 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-2 rounded hover:bg-primary/10 disabled:opacity-50 disabled:cursor-not-allowed text-foreground"
             title="Zoom in"
           >
             <ZoomIn className="h-5 w-5" />

@@ -57,7 +57,7 @@ export default function QuizGenerator({ file, onQuizGenerated }: QuizGeneratorPr
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-blue-600" aria-hidden="true" />
+          <Sparkles className="h-5 w-5 text-primary" aria-hidden="true" />
           Generate Quiz
         </CardTitle>
         <CardDescription>
@@ -76,33 +76,33 @@ export default function QuizGenerator({ file, onQuizGenerated }: QuizGeneratorPr
             onValueChange={(value) => setQuizType(value as 'MCQ' | 'SAQ' | 'LAQ')}
             className="space-y-2"
           >
-            <div className="flex items-center space-x-3 rounded-lg border p-4 hover:bg-gray-50 transition-colors">
+            <div className="flex items-center space-x-3 rounded-lg border border-border p-4 hover:bg-primary/5 transition-colors">
               <RadioGroupItem value="MCQ" id="mcq" />
               <Label htmlFor="mcq" className="flex-1 cursor-pointer">
-                <div className="font-medium">Multiple Choice (MCQ)</div>
-                <div className="text-sm text-gray-600">
+                <div className="font-medium text-foreground">Multiple Choice (MCQ)</div>
+                <div className="text-sm text-muted-foreground">
                   4 options with one correct answer
                 </div>
               </Label>
               <Badge variant="secondary">Quick</Badge>
             </div>
 
-            <div className="flex items-center space-x-3 rounded-lg border p-4 hover:bg-gray-50 transition-colors">
+            <div className="flex items-center space-x-3 rounded-lg border border-border p-4 hover:bg-primary/5 transition-colors">
               <RadioGroupItem value="SAQ" id="saq" />
               <Label htmlFor="saq" className="flex-1 cursor-pointer">
-                <div className="font-medium">Short Answer (SAQ)</div>
-                <div className="text-sm text-gray-600">
+                <div className="font-medium text-foreground">Short Answer (SAQ)</div>
+                <div className="text-sm text-muted-foreground">
                   Brief 2-3 sentence responses
                 </div>
               </Label>
               <Badge variant="secondary">Medium</Badge>
             </div>
 
-            <div className="flex items-center space-x-3 rounded-lg border p-4 hover:bg-gray-50 transition-colors">
+            <div className="flex items-center space-x-3 rounded-lg border border-border p-4 hover:bg-primary/5 transition-colors">
               <RadioGroupItem value="LAQ" id="laq" />
               <Label htmlFor="laq" className="flex-1 cursor-pointer">
-                <div className="font-medium">Long Answer (LAQ)</div>
-                <div className="text-sm text-gray-600">
+                <div className="font-medium text-foreground">Long Answer (LAQ)</div>
+                <div className="text-sm text-muted-foreground">
                   Detailed paragraph responses
                 </div>
               </Label>
@@ -124,13 +124,13 @@ export default function QuizGenerator({ file, onQuizGenerated }: QuizGeneratorPr
             step="1"
             value={numberOfQuestions}
             onChange={(e) => setNumberOfQuestions(parseInt(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+            className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
             aria-valuemin={3}
             aria-valuemax={10}
             aria-valuenow={numberOfQuestions}
             aria-label="Number of questions slider"
           />
-          <div className="flex justify-between text-xs text-gray-500">
+          <div className="flex justify-between text-xs text-muted-foreground">
             <span>3 questions</span>
             <span>10 questions</span>
           </div>
@@ -140,7 +140,7 @@ export default function QuizGenerator({ file, onQuizGenerated }: QuizGeneratorPr
         {error && (
           <div
             role="alert"
-            className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm"
+            className="p-4 bg-destructive/10 border border-destructive/30 rounded-lg text-destructive text-sm"
           >
             {error}
           </div>
