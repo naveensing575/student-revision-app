@@ -9,8 +9,8 @@ import QuizDisplay from '@/components/QuizDisplay'
 const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
   ssr: false,
   loading: () => (
-    <div className="flex items-center justify-center h-full bg-gray-100 rounded-lg border border-gray-300">
-      <p className="text-gray-500">Loading PDF viewer...</p>
+    <div className="flex items-center justify-center h-full bg-gradient-to-br from-muted to-muted/50 rounded-xl border border-border">
+      <p className="text-muted-foreground">Loading PDF viewer...</p>
     </div>
   ),
 })
@@ -44,55 +44,59 @@ export default function HomePage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-          Welcome to Your Study Companion
-        </h2>
-        <p className="text-gray-600 mb-8">
-          Upload PDFs, generate quizzes, and track your learning progress with AI-powered tools.
-        </p>
-
-        {!selectedPDF ? (
-          <div className="bg-white rounded-lg shadow p-6 border">
-            <SourceSelector onPDFSelect={handlePDFSelect} />
+    <div className="min-h-screen bg-gradient-to-br from-background via-secondary/20 to-accent/10">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent mb-4">
+              Your AI Study Companion
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Upload PDFs, generate intelligent quizzes, and track your learning progress with AI-powered tools
+            </p>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* PDF Viewer */}
-            <div className="h-[600px]">
-              <PDFViewer file={selectedPDF} />
-            </div>
 
-            {/* Quiz Panel */}
-            <div className="space-y-6">
-              <div className="bg-white rounded-lg shadow p-6 border">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Current Document
-                </h3>
-                <p className="text-sm text-gray-600">{selectedPDF.name}</p>
-                <button
-                  onClick={() => setSelectedPDF(null)}
-                  className="mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
-                  aria-label="Change document"
-                >
-                  ← Change document
-                </button>
+          {!selectedPDF ? (
+            <div className="gradient-card rounded-xl shadow-xl p-8 border border-white/20 backdrop-blur-sm">
+              <SourceSelector onPDFSelect={handlePDFSelect} />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* PDF Viewer */}
+              <div className="h-[600px] rounded-xl overflow-hidden shadow-2xl">
+                <PDFViewer file={selectedPDF} />
               </div>
 
-              {!generatedQuiz ? (
-                <QuizGenerator file={selectedPDF} onQuizGenerated={handleQuizGenerated} />
-              ) : (
-                <QuizDisplay
-                  quiz={generatedQuiz}
-                  quizType={quizType}
-                  pdfName={selectedPDF.name}
-                  onRestart={handleRestartQuiz}
-                />
-              )}
+              {/* Quiz Panel */}
+              <div className="space-y-6">
+                <div className="gradient-card rounded-xl shadow-xl p-6 border border-white/20 backdrop-blur-sm">
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                    Current Document
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-3">{selectedPDF.name}</p>
+                  <button
+                    onClick={() => setSelectedPDF(null)}
+                    className="text-sm text-primary hover:text-primary/80 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded px-2 py-1 transition-colors"
+                    aria-label="Change document"
+                  >
+                    ← Change document
+                  </button>
+                </div>
+
+                {!generatedQuiz ? (
+                  <QuizGenerator file={selectedPDF} onQuizGenerated={handleQuizGenerated} />
+                ) : (
+                  <QuizDisplay
+                    quiz={generatedQuiz}
+                    quizType={quizType}
+                    pdfName={selectedPDF.name}
+                    onRestart={handleRestartQuiz}
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   )
