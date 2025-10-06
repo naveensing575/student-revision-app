@@ -65,7 +65,7 @@ export default function HomePage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="h-[600px] rounded-2xl overflow-hidden shadow-2xl glow-border">
+              <div className="h-[700px] rounded-2xl overflow-hidden shadow-2xl glow-border">
                 <PDFViewer file={selectedPDF} />
               </div>
 
