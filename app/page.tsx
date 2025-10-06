@@ -4,10 +4,19 @@ import { useState } from 'react'
 import SourceSelector from '@/components/SourceSelector'
 import PDFViewer from '@/components/PDFViewer'
 import QuizGenerator from '@/components/QuizGenerator'
+import QuizDisplay from '@/components/QuizDisplay'
+
+interface Question {
+  question: string
+  options?: string[]
+  correctAnswer: string
+  explanation: string
+}
 
 export default function HomePage() {
   const [selectedPDF, setSelectedPDF] = useState<File | null>(null)
-  const [generatedQuiz, setGeneratedQuiz] = useState<any[] | null>(null)
+  const [generatedQuiz, setGeneratedQuiz] = useState<Question[] | null>(null)
+  const [quizType, setQuizType] = useState<'MCQ' | 'SAQ' | 'LAQ'>('MCQ')
 
   const handlePDFSelect = (file: File) => {
     setSelectedPDF(file)
@@ -15,9 +24,14 @@ export default function HomePage() {
     console.log('PDF selected:', file.name)
   }
 
-  const handleQuizGenerated = (quiz: any[]) => {
+  const handleQuizGenerated = (quiz: Question[], type: 'MCQ' | 'SAQ' | 'LAQ') => {
     setGeneratedQuiz(quiz)
+    setQuizType(type)
     console.log('Quiz generated:', quiz)
+  }
+
+  const handleRestartQuiz = () => {
+    setGeneratedQuiz(null)
   }
 
   return (
@@ -60,14 +74,7 @@ export default function HomePage() {
               {!generatedQuiz ? (
                 <QuizGenerator file={selectedPDF} onQuizGenerated={handleQuizGenerated} />
               ) : (
-                <div className="bg-white rounded-lg shadow p-6 border">
-                  <p className="text-green-700 font-medium">
-                    ✓ Quiz generated! ({generatedQuiz.length} questions)
-                  </p>
-                  <p className="text-sm text-gray-500 mt-2">
-                    Quiz display coming next...
-                  </p>
-                </div>
+                <QuizDisplay quiz={generatedQuiz} quizType={quizType} onRestart={handleRestartQuiz} />
               )}
             </div>
           </div>

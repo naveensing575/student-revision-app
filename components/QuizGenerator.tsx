@@ -11,7 +11,7 @@ import { extractTextFromPDF } from '@/lib/pdf-utils'
 
 interface QuizGeneratorProps {
   file: File
-  onQuizGenerated: (quiz: any[]) => void
+  onQuizGenerated: (quiz: any[], quizType: 'MCQ' | 'SAQ' | 'LAQ') => void
 }
 
 export default function QuizGenerator({ file, onQuizGenerated }: QuizGeneratorProps) {
@@ -44,7 +44,7 @@ export default function QuizGenerator({ file, onQuizGenerated }: QuizGeneratorPr
       }
 
       const data = await response.json()
-      onQuizGenerated(data.quiz)
+      onQuizGenerated(data.quiz, quizType)
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.')
       console.error('Quiz generation error:', err)
