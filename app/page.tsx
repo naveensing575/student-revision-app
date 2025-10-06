@@ -74,7 +74,12 @@ export default function HomePage() {
               {!generatedQuiz ? (
                 <QuizGenerator file={selectedPDF} onQuizGenerated={handleQuizGenerated} />
               ) : (
-                <QuizDisplay quiz={generatedQuiz} quizType={quizType} onRestart={handleRestartQuiz} />
+                <QuizDisplay
+                  quiz={generatedQuiz}
+                  quizType={quizType}
+                  pdfName={selectedPDF.name}
+                  onRestart={handleRestartQuiz}
+                />
               )}
             </div>
           </div>

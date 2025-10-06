@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { CheckCircle2, XCircle, ChevronRight, RotateCcw } from 'lucide-react'
+import { saveQuizAttempt } from '@/lib/storage'
 
 interface Question {
   question: string
@@ -19,14 +20,16 @@ interface Question {
 interface QuizDisplayProps {
   quiz: Question[]
   quizType: 'MCQ' | 'SAQ' | 'LAQ'
+  pdfName: string
   onRestart: () => void
 }
 
-export default function QuizDisplay({ quiz, quizType, onRestart }: QuizDisplayProps) {
+export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: QuizDisplayProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [userAnswers, setUserAnswers] = useState<string[]>(Array(quiz.length).fill(''))
   const [showResults, setShowResults] = useState(false)
   const [submitted, setSubmitted] = useState<boolean[]>(Array(quiz.length).fill(false))
+  const [attemptSaved, setAttemptSaved] = useState(false)
 
   const currentQuestion = quiz[currentQuestionIndex]
   const isLastQuestion = currentQuestionIndex === quiz.length - 1
@@ -64,11 +67,29 @@ export default function QuizDisplay({ quiz, quizType, onRestart }: QuizDisplayPr
     return correct
   }
 
+  useEffect(() => {
+    if (showResults && !attemptSaved) {
+      const correctAnswers = calculateScore()
+      const score = Math.round((correctAnswers / quiz.length) * 100)
+
+      saveQuizAttempt({
+        pdfName,
+        quizType,
+        totalQuestions: quiz.length,
+        correctAnswers,
+        score,
+      })
+
+      setAttemptSaved(true)
+    }
+  }, [showResults, attemptSaved, pdfName, quizType, quiz.length])
+
   const handleRestart = () => {
     setCurrentQuestionIndex(0)
     setUserAnswers(Array(quiz.length).fill(''))
     setShowResults(false)
     setSubmitted(Array(quiz.length).fill(false))
+    setAttemptSaved(false)
     onRestart()
   }
 
