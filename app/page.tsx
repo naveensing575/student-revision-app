@@ -3,13 +3,21 @@
 import { useState } from 'react'
 import SourceSelector from '@/components/SourceSelector'
 import PDFViewer from '@/components/PDFViewer'
+import QuizGenerator from '@/components/QuizGenerator'
 
 export default function HomePage() {
   const [selectedPDF, setSelectedPDF] = useState<File | null>(null)
+  const [generatedQuiz, setGeneratedQuiz] = useState<any[] | null>(null)
 
   const handlePDFSelect = (file: File) => {
     setSelectedPDF(file)
+    setGeneratedQuiz(null)
     console.log('PDF selected:', file.name)
+  }
+
+  const handleQuizGenerated = (quiz: any[]) => {
+    setGeneratedQuiz(quiz)
+    console.log('Quiz generated:', quiz)
   }
 
   return (
@@ -33,26 +41,34 @@ export default function HomePage() {
               <PDFViewer file={selectedPDF} />
             </div>
 
-            {/* Actions Panel */}
-            <div className="bg-white rounded-lg shadow p-6 border">
-              <div className="mb-6">
+            {/* Quiz Panel */}
+            <div className="space-y-6">
+              <div className="bg-white rounded-lg shadow p-6 border">
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
                   Current Document
                 </h3>
                 <p className="text-sm text-gray-600">{selectedPDF.name}</p>
                 <button
                   onClick={() => setSelectedPDF(null)}
-                  className="mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium"
+                  className="mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+                  aria-label="Change document"
                 >
                   ← Change document
                 </button>
               </div>
 
-              <div className="border-t pt-6">
-                <p className="text-gray-500 text-center py-8">
-                  Quiz generator coming next...
-                </p>
-              </div>
+              {!generatedQuiz ? (
+                <QuizGenerator file={selectedPDF} onQuizGenerated={handleQuizGenerated} />
+              ) : (
+                <div className="bg-white rounded-lg shadow p-6 border">
+                  <p className="text-green-700 font-medium">
+                    ✓ Quiz generated! ({generatedQuiz.length} questions)
+                  </p>
+                  <p className="text-sm text-gray-500 mt-2">
+                    Quiz display coming next...
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
