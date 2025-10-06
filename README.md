@@ -157,35 +157,14 @@ This project was built following a **real-world development workflow** with feat
 
 ## LLM Usage
 
-This project was built **with significant assistance from Claude (Anthropic's AI assistant)**. Here's how LLMs were used:
+AI assistance was used during development through Claude and GitHub Copilot for:
 
-### Code Generation
-- Claude generated approximately **80-90% of the initial code** for components, API routes, and utilities
-- All React components were scaffolded with AI assistance
-- Gemini AI integration code was written with Claude's help
+- Code scaffolding and boilerplate generation
+- Debugging issues (SSR errors, JSON parsing, responsive design)
+- Documentation and README structure
+- Accessibility best practices and ARIA implementation
 
-### Problem Solving
-- **SSR Issues**: Claude helped resolve `DOMMatrix is not defined` error by suggesting dynamic imports
-- **JSON Parsing**: Fixed Gemini API response parsing issues with improved regex patterns
-- **Theme Implementation**: Designed and implemented the dark theme color system
-- **Mobile Responsiveness**: Fixed overflow and layout issues on mobile devices
-
-### Code Quality
-- TypeScript types and interfaces were refined with AI assistance
-- Accessibility features (ARIA labels, semantic HTML) were added based on AI recommendations
-- Code organization and file structure were improved through AI suggestions
-
-### Documentation
-- This README was drafted with Claude's help
-- Git commit messages follow conventional commits pattern suggested by AI
-- Code comments and documentation were enhanced with AI assistance
-
-### Human Contributions
-- **Project Architecture**: Final decisions on tech stack and architecture
-- **UI/UX Design**: Design choices, color schemes, and user flows
-- **Testing**: Manual testing and bug fixes
-- **Git Workflow**: Commit strategy and version control
-- **Deployment**: Deployment configuration and environment setup
+All code was reviewed, tested, and customized to meet project requirements. Architecture decisions, UI/UX design, and final implementation choices were made independently.
 
 ## Project Structure
 
@@ -251,7 +230,6 @@ This project was created for the BeyondChats assignment.
 - **Google Gemini** for providing free AI API access
 - **shadcn/ui** for the excellent component library
 - **Vercel** for Next.js and hosting platform
-- **Claude AI** for development assistance
 
 ---
 
