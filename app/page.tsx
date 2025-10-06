@@ -1,4 +1,16 @@
+'use client'
+
+import { useState } from 'react'
+import SourceSelector from '@/components/SourceSelector'
+
 export default function HomePage() {
+  const [selectedPDF, setSelectedPDF] = useState<File | null>(null)
+
+  const handlePDFSelect = (file: File) => {
+    setSelectedPDF(file)
+    console.log('PDF selected:', file.name)
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
@@ -9,12 +21,17 @@ export default function HomePage() {
           Upload PDFs, generate quizzes, and track your learning progress with AI-powered tools.
         </p>
 
-        {/* Source Selector will go here */}
         <div className="bg-white rounded-lg shadow p-6 border">
-          <p className="text-gray-500 text-center py-8">
-            Source selector coming next...
-          </p>
+          <SourceSelector onPDFSelect={handlePDFSelect} />
         </div>
+
+        {selectedPDF && (
+          <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <p className="text-green-800">
+              ✓ Ready to work with: <span className="font-semibold">{selectedPDF.name}</span>
+            </p>
+          </div>
+        )}
       </div>
     </div>
   )
