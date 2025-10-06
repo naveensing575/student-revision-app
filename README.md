@@ -83,7 +83,19 @@ An AI-powered web application that helps students study effectively by generatin
 
 ## Architecture
 
-Built with Next.js App Router for modern React patterns and server-side rendering. Uses Google Gemini AI for quiz generation, react-pdf for document viewing, and localStorage for client-side data persistence. Styled with Tailwind CSS v4 and shadcn/ui components for accessibility.
+**Approach**: Next.js App Router with client-side state management via localStorage and Google Gemini AI integration.
+
+**Why this approach**:
+- App Router provides optimal performance with server/client component separation
+- localStorage enables offline quiz history without backend complexity
+- Gemini offers free tier API access with strong reasoning capabilities
+
+**Tradeoffs**:
+- localStorage limits cross-device sync (vs database)
+- Client-side PDF processing increases bundle size (vs server-side)
+- Free tier AI has rate limits (vs paid solutions)
+
+**My Decision**: Prioritized rapid development and zero hosting costs while maintaining rich features. The tradeoffs are acceptable for a student-focused learning tool where most users work on a single device.
 
 ## Project Structure
 
