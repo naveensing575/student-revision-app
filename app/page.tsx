@@ -1,10 +1,19 @@
 'use client'
 
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
 import SourceSelector from '@/components/SourceSelector'
-import PDFViewer from '@/components/PDFViewer'
 import QuizGenerator from '@/components/QuizGenerator'
 import QuizDisplay from '@/components/QuizDisplay'
+
+const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center h-full bg-gray-100 rounded-lg border border-gray-300">
+      <p className="text-gray-500">Loading PDF viewer...</p>
+    </div>
+  ),
+})
 
 interface Question {
   question: string
