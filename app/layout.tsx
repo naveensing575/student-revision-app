@@ -4,6 +4,7 @@ import "./globals.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import Header from "@/components/Header";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        <ErrorBoundary>
+          <Header />
+          <main className="min-h-screen">
+            {children}
+          </main>
+        </ErrorBoundary>
       </body>
     </html>
   );
