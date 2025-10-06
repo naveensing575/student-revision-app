@@ -2,20 +2,20 @@
 
 A comprehensive web application built for the BeyondChats assignment that helps students revise their study materials through AI-powered quiz generation and interactive learning features.
 
-## 🚀 Live Demo
+## Live Demo
 
 [Live URL will be added after deployment]
 
-## ✨ Features
+## Features
 
 ### Core Features (Assignment Requirements)
-- **📄 PDF Upload & Viewer**: Drag-and-drop PDF upload with a fully functional viewer featuring zoom controls and page navigation
-- **🤖 AI Quiz Generation**: Generate three types of quizzes using Google Gemini AI:
+- **PDF Upload & Viewer**: Drag-and-drop PDF upload with a fully functional viewer featuring zoom controls and page navigation
+- **AI Quiz Generation**: Generate three types of quizzes using Google Gemini AI:
   - **MCQ (Multiple Choice Questions)**: 4 options with one correct answer
   - **SAQ (Short Answer Questions)**: Brief 2-3 sentence responses
   - **LAQ (Long Answer Questions)**: Detailed paragraph responses
-- **✅ Quiz Scoring**: Automatic scoring for MCQs with detailed explanations for all question types
-- **📊 Progress Tracking Dashboard**: Comprehensive analytics showing:
+- **Quiz Scoring**: Automatic scoring for MCQs with detailed explanations for all question types
+- **Progress Tracking Dashboard**: Comprehensive analytics showing:
   - Total quiz attempts
   - Average scores
   - Correct/total questions ratio
@@ -23,14 +23,14 @@ A comprehensive web application built for the BeyondChats assignment that helps 
   - Detailed quiz history with timestamps
 
 ### Additional Features
-- **💬 AI Study Chat**: Interactive chat interface for asking questions about uploaded PDFs or general study topics
-- **🎨 Dark Theme**: Modern dark UI with OKLCH color space for better visual comfort
-- **📱 Responsive Design**: Fully mobile-responsive across all pages and components
-- **♿ WCAG Compliance**: Accessibility features including ARIA labels, keyboard navigation, and proper focus indicators
-- **⚡ Error Handling**: Comprehensive error boundaries and skeleton loaders for better UX
-- **💾 Local Storage**: Client-side persistence for quiz history and progress
+- **AI Study Chat**: Interactive chat interface for asking questions about uploaded PDFs or general study topics
+- **Dark Theme**: Modern dark UI with OKLCH color space for better visual comfort
+- **Responsive Design**: Fully mobile-responsive across all pages and components
+- **WCAG Compliance**: Accessibility features including ARIA labels, keyboard navigation, and proper focus indicators
+- **Error Handling**: Comprehensive error boundaries and skeleton loaders for better UX
+- **Local Storage**: Client-side persistence for quiz history and progress
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: Next.js 15.5.4 (App Router)
 - **Language**: TypeScript
@@ -41,7 +41,7 @@ A comprehensive web application built for the BeyondChats assignment that helps 
 - **State Management**: React Hooks + localStorage
 - **Deployment**: Vercel
 
-## 📋 Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 - Node.js 18+ and npm installed
@@ -76,7 +76,7 @@ A comprehensive web application built for the BeyondChats assignment that helps 
 
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 🎯 How to Use
+## How to Use
 
 ### Creating a Quiz
 1. Upload a PDF document by dragging and dropping or clicking the upload area
@@ -99,7 +99,7 @@ A comprehensive web application built for the BeyondChats assignment that helps 
 3. Browse through your quiz history
 4. Clear history if needed
 
-## 🏗️ How It Was Built
+## How It Was Built
 
 ### Development Journey
 
@@ -131,31 +131,31 @@ This project was built following a **real-world development workflow** with feat
 
 **Dynamic Imports**: Employed for PDF viewer to avoid SSR issues with browser-only APIs.
 
-## ✅ What's Implemented
+## What's Implemented
 
-- ✅ PDF upload with drag-and-drop
-- ✅ PDF viewer with zoom and pagination
-- ✅ AI quiz generation (MCQ, SAQ, LAQ)
-- ✅ Quiz scoring with explanations
-- ✅ Progress tracking dashboard
-- ✅ Quiz history with timestamps
-- ✅ AI chat interface
-- ✅ Dark theme with modern UI
-- ✅ Full mobile responsiveness
-- ✅ WCAG accessibility compliance
-- ✅ Error boundaries
-- ✅ Loading states with skeletons
-- ✅ Conventional commit messages
-- ✅ Clean, maintainable code
+- PDF upload with drag-and-drop
+- PDF viewer with zoom and pagination
+- AI quiz generation (MCQ, SAQ, LAQ)
+- Quiz scoring with explanations
+- Progress tracking dashboard
+- Quiz history with timestamps
+- AI chat interface
+- Dark theme with modern UI
+- Full mobile responsiveness
+- WCAG accessibility compliance
+- Error boundaries
+- Loading states with skeletons
+- Conventional commit messages
+- Clean, maintainable code
 
-## ⚠️ Known Limitations
+## Known Limitations
 
 - **No Backend Database**: Quiz history is stored in localStorage, so data is device-specific
 - **SAQ/LAQ Scoring**: Only MCQs have automatic scoring; SAQ/LAQ show model answers for self-evaluation
 - **PDF Size**: Very large PDFs (100+ pages) may cause slower processing times
 - **API Rate Limits**: Google Gemini free tier has rate limits that may affect heavy usage
 
-## 🤖 LLM Usage
+## LLM Usage
 
 This project was built **with significant assistance from Claude (Anthropic's AI assistant)**. Here's how LLMs were used:
 
@@ -187,7 +187,7 @@ This project was built **with significant assistance from Claude (Anthropic's AI
 - **Git Workflow**: Commit strategy and version control
 - **Deployment**: Deployment configuration and environment setup
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 student-revision-app/
@@ -216,7 +216,7 @@ student-revision-app/
 └── public/                          # Static assets
 ```
 
-## 🚀 Deployment
+## Deployment
 
 This app is designed to be deployed on Vercel:
 
@@ -231,7 +231,7 @@ vercel
 # GEMINI_API_KEY=your_key_here
 ```
 
-## 📝 Git Commit History
+## Git Commit History
 
 All development was tracked with descriptive conventional commits:
 - `feat:` - New features
@@ -241,11 +241,11 @@ All development was tracked with descriptive conventional commits:
 
 View the commit history to see the complete development journey.
 
-## 📄 License
+## License
 
 This project was created for the BeyondChats assignment.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **BeyondChats** for the assignment opportunity
 - **Google Gemini** for providing free AI API access
@@ -255,4 +255,4 @@ This project was created for the BeyondChats assignment.
 
 ---
 
-**Built with ❤️ for BeyondChats Assignment**
+Built for BeyondChats Assignment

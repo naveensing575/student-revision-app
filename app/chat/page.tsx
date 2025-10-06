@@ -49,7 +49,6 @@ export default function ChatPage() {
       }
       setMessages([welcomeMsg])
     } catch (error) {
-      console.error('PDF upload error:', error)
     }
   }
 
@@ -96,7 +95,6 @@ export default function ChatPage() {
 
       setMessages((prev) => [...prev, assistantMessage])
     } catch (error) {
-      console.error('Chat error:', error)
       const errorMessage: Message = {
         id: crypto.randomUUID(),
         role: 'assistant',

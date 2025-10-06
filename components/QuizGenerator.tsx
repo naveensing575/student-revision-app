@@ -47,7 +47,6 @@ export default function QuizGenerator({ file, onQuizGenerated }: QuizGeneratorPr
       onQuizGenerated(data.quiz, quizType)
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.')
-      console.error('Quiz generation error:', err)
     } finally {
       setIsGenerating(false)
     }

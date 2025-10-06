@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
 import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react'
 
-// Configure PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
 
 interface PDFViewerProps {
@@ -51,7 +50,6 @@ export default function PDFViewer({ file }: PDFViewerProps) {
 
   return (
     <div className="flex flex-col h-full bg-card/50 rounded-lg overflow-hidden border border-border">
-      {/* Controls */}
       <div className="bg-card border-b border-border px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button
@@ -102,7 +100,6 @@ export default function PDFViewer({ file }: PDFViewerProps) {
         </div>
       </div>
 
-      {/* PDF Display */}
       <div className="flex-1 overflow-auto p-4 flex justify-center">
         {fileUrl && (
           <Document
