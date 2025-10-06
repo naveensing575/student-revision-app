@@ -54,18 +54,47 @@ IMPORTANT: Return ONLY the JSON array, no additional text.`
   try {
     const result = await model.generateContent(prompt)
     const response = result.response
-    const text = response.text()
+    let text = response.text()
 
-    // Extract JSON from response
-    const jsonMatch = text.match(/\[[\s\S]*\]/)
+    console.log('Raw AI response:', text)
+
+    // Clean up the response - remove markdown code blocks if present
+    text = text.replace(/```json\s*/g, '').replace(/```\s*/g, '')
+
+    // Try to find JSON array
+    let jsonMatch = text.match(/\[\s*\{[\s\S]*\}\s*\]/)
+
     if (!jsonMatch) {
-      throw new Error('Failed to parse quiz JSON from response')
+      // Fallback: try to find just the array brackets
+      const startIndex = text.indexOf('[')
+      const endIndex = text.lastIndexOf(']')
+
+      if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
+        jsonMatch = [text.substring(startIndex, endIndex + 1)]
+      } else {
+        throw new Error('Could not find valid JSON array in response')
+      }
     }
 
-    const quiz = JSON.parse(jsonMatch[0])
+    let jsonString = jsonMatch[0]
+
+    // Clean up common JSON issues
+    jsonString = jsonString
+      .replace(/,\s*}/g, '}')  // Remove trailing commas
+      .replace(/,\s*]/g, ']')  // Remove trailing commas in arrays
+
+    console.log('Extracted JSON:', jsonString)
+
+    const quiz = JSON.parse(jsonString)
+
+    if (!Array.isArray(quiz) || quiz.length === 0) {
+      throw new Error('Invalid quiz format: expected non-empty array')
+    }
+
     return quiz
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error generating quiz:', error)
-    throw error
+    console.error('Error details:', error.message)
+    throw new Error(`Failed to generate quiz: ${error.message}`)
   }
 }
