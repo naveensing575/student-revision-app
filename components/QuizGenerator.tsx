@@ -9,9 +9,16 @@ import { Badge } from '@/components/ui/badge'
 import { Loader2, Sparkles } from 'lucide-react'
 import { extractTextFromPDF } from '@/lib/pdf-utils'
 
+interface Question {
+  question: string
+  options?: string[]
+  correctAnswer: string
+  explanation: string
+}
+
 interface QuizGeneratorProps {
   file: File
-  onQuizGenerated: (quiz: any[], quizType: 'MCQ' | 'SAQ' | 'LAQ') => void
+  onQuizGenerated: (quiz: Question[], quizType: 'MCQ' | 'SAQ' | 'LAQ') => void
 }
 
 export default function QuizGenerator({ file, onQuizGenerated }: QuizGeneratorProps) {
@@ -45,8 +52,9 @@ export default function QuizGenerator({ file, onQuizGenerated }: QuizGeneratorPr
 
       const data = await response.json()
       onQuizGenerated(data.quiz, quizType)
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.')
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Something went wrong. Please try again.'
+      setError(errorMessage)
     } finally {
       setIsGenerating(false)
     }

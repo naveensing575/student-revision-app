@@ -84,7 +84,8 @@ IMPORTANT: Return ONLY the JSON array, no additional text.`
     }
 
     return quiz
-  } catch (error: any) {
-    throw new Error(`Failed to generate quiz: ${error.message}`)
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    throw new Error(`Failed to generate quiz: ${errorMessage}`)
   }
 }

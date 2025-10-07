@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
@@ -55,7 +55,7 @@ export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: Quiz
     }
   }
 
-  const calculateScore = () => {
+  const calculateScore = useCallback(() => {
     let correct = 0
     quiz.forEach((q, index) => {
       if (quizType === 'MCQ') {
@@ -65,7 +65,7 @@ export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: Quiz
       }
     })
     return correct
-  }
+  }, [quiz, quizType, userAnswers])
 
   useEffect(() => {
     if (showResults && !attemptSaved) {
@@ -82,7 +82,7 @@ export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: Quiz
 
       setAttemptSaved(true)
     }
-  }, [showResults, attemptSaved, pdfName, quizType, quiz.length])
+  }, [showResults, attemptSaved, pdfName, quizType, quiz.length, calculateScore])
 
   const handleRestart = () => {
     setCurrentQuestionIndex(0)
@@ -101,7 +101,7 @@ export default function QuizDisplay({ quiz, quizType, pdfName, onRestart }: Quiz
       <Card>
         <CardHeader>
           <CardTitle>Quiz Results</CardTitle>
-          <CardDescription>Here's how you performed</CardDescription>
+          <CardDescription>Here&apos;s how you performed</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="text-center py-6">
