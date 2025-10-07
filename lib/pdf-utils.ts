@@ -1,8 +1,9 @@
-import * as pdfjsLib from 'pdfjs-dist'
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
-
 export async function extractTextFromPDF(file: File): Promise<string> {
+  // Dynamic import to avoid SSR issues with pdfjs-dist
+  const pdfjsLib = await import('pdfjs-dist')
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`
+
   try {
     const arrayBuffer = await file.arrayBuffer()
     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
@@ -19,7 +20,7 @@ export async function extractTextFromPDF(file: File): Promise<string> {
     }
 
     return fullText
-  } catch (error) {
+  } catch {
     throw new Error('Failed to extract text from PDF')
   }
 }

@@ -48,7 +48,8 @@ export default function ChatPage() {
         timestamp: Date.now(),
       }
       setMessages([welcomeMsg])
-    } catch (error) {
+    } catch {
+      // Error silently handled - PDF upload failed
     }
   }
 
@@ -94,7 +95,7 @@ export default function ChatPage() {
       }
 
       setMessages((prev) => [...prev, assistantMessage])
-    } catch (error) {
+    } catch {
       const errorMessage: Message = {
         id: crypto.randomUUID(),
         role: 'assistant',

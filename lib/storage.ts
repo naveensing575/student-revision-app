@@ -30,7 +30,7 @@ export function getQuizAttempts(): QuizAttempt[] {
   try {
     const data = localStorage.getItem(STORAGE_KEY)
     return data ? JSON.parse(data) : []
-  } catch (error) {
+  } catch {
     return []
   }
 }
