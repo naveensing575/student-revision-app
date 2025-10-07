@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import SourceSelector from '@/components/SourceSelector'
 import QuizGenerator from '@/components/QuizGenerator'
 import QuizDisplay from '@/components/QuizDisplay'
+import YouTubeRecommender from '@/components/YouTubeRecommender'
 
 const PDFViewer = dynamic(() => import('@/components/PDFViewer'), {
   ssr: false,
@@ -64,38 +65,44 @@ export default function HomePage() {
               <SourceSelector onPDFSelect={handlePDFSelect} />
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="h-[700px] rounded-2xl overflow-hidden shadow-2xl glow-border">
-                <PDFViewer file={selectedPDF} />
-              </div>
-
-              <div className="space-y-6">
-                <div className="gradient-card rounded-2xl shadow-2xl p-6 glow-border">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    Current Document
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-3 truncate">{selectedPDF.name}</p>
-                  <button
-                    onClick={() => setSelectedPDF(null)}
-                    className="text-sm text-primary hover:text-primary/80 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover:bg-primary/10 transition-all"
-                    aria-label="Change document"
-                  >
-                    ← Change document
-                  </button>
+            <>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="h-[700px] rounded-2xl overflow-hidden shadow-2xl glow-border">
+                  <PDFViewer file={selectedPDF} />
                 </div>
 
-                {!generatedQuiz ? (
-                  <QuizGenerator file={selectedPDF} onQuizGenerated={handleQuizGenerated} />
-                ) : (
-                  <QuizDisplay
-                    quiz={generatedQuiz}
-                    quizType={quizType}
-                    pdfName={selectedPDF.name}
-                    onRestart={handleRestartQuiz}
-                  />
-                )}
+                <div className="space-y-6">
+                  <div className="gradient-card rounded-2xl shadow-2xl p-6 glow-border">
+                    <h3 className="text-xl font-semibold text-foreground mb-2">
+                      Current Document
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-3 truncate">{selectedPDF.name}</p>
+                    <button
+                      onClick={() => setSelectedPDF(null)}
+                      className="text-sm text-primary hover:text-primary/80 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover:bg-primary/10 transition-all"
+                      aria-label="Change document"
+                    >
+                      ← Change document
+                    </button>
+                  </div>
+
+                  {!generatedQuiz ? (
+                    <QuizGenerator file={selectedPDF} onQuizGenerated={handleQuizGenerated} />
+                  ) : (
+                    <QuizDisplay
+                      quiz={generatedQuiz}
+                      quizType={quizType}
+                      pdfName={selectedPDF.name}
+                      onRestart={handleRestartQuiz}
+                    />
+                  )}
+                </div>
               </div>
-            </div>
+
+              <div className="mt-6">
+                <YouTubeRecommender file={selectedPDF} />
+              </div>
+            </>
           )}
         </div>
       </div>
